@@ -11,10 +11,11 @@ pipeline {
             steps {
                 script {
                     def buildTag = "build-${BUILD_NUMBER}"
-                    withCredentials([string(credentialsId: '66a49eec-98e6-48de-9fd3-01e1d86d03ee', secretVariable: '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')]) {
+                    withCredentials([gitUsernamePassword(credentialsId: '66a49eec-98e6-48de-9fd3-01e1d86d03ee', gitToolName: 'Default')]) {
+                        sh "git config --global user.email 'saiswaroopasaranath1211@gmail.com'"
+                        sh "git config --global user.name 'Swaraa1211'"
                         sh "git tag -a ${buildTag} -m 'Jenkins build ${BUILD_NUMBER}'"
                         sh "git push origin ${buildTag}"
-                    }
 
                     // sh "echo Creating tag ${buildTag}"
                     // sh "git tag -a ${buildTag} -m 'Jenkins build ${BUILD_NUMBER}'"
